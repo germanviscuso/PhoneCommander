@@ -132,7 +132,7 @@ public class SendServlet extends HttpServlet {
             resp.getWriter().println(OK_STATUS);
             return true;
         } else {
-            log.warning("Error: Unable to send link to phone.");
+            log.warning("Error: Unable to send link to the phone.");
             resp.setStatus(500);
             resp.getWriter().println(ERROR_STATUS + " (Unable to send link)");
             return false;
