@@ -23,7 +23,7 @@ import javax.jdo.annotations.PrimaryKey;
 import com.google.appengine.api.datastore.Key;
 
 /**
- * Persistent config info for the server - authentication token 
+ * Persistent config info for the server - authentication token  
  */
 @PersistenceCapable
 public final class C2DMConfig {

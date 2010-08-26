@@ -46,7 +46,7 @@ public class C2DMessaging {
     private static final String UPDATE_CLIENT_AUTH = "Update-Client-Auth";
 
     public static final String DATAMESSAGING_SEND_ENDPOINT =
-        "https://android.clients.google.com/c2dm/send";
+        "https://android.clients.google.com/c2dm/send"; 
 
     private static final Logger log = Logger.getLogger(C2DMessaging.class.getName());
 
@@ -140,7 +140,6 @@ public class C2DMessaging {
 
         byte[] postData = postDataBuilder.toString().getBytes(UTF8);
 
-        log.info("Connecting to Google datamessaging endpoint...");
         // Hit the dm URL.
         URL url = new URL(DATAMESSAGING_SEND_ENDPOINT);
 
@@ -156,7 +155,6 @@ public class C2DMessaging {
         OutputStream out = conn.getOutputStream();
         out.write(postData);
         out.close();
-        log.info("Connection to Google datamessaging endpoint successful!");
 
         int responseCode = conn.getResponseCode();
 
@@ -166,9 +164,9 @@ public class C2DMessaging {
             // from DB. This happens if the password is changed or token expires. Either admin
             // is updating the token, or Update-Client-Auth was received by another server,
             // and next retry will get the good one from database.
-            log.warning("Unauthorized - need the token");
+            log.warning("Unauthorized - need token");
             serverConfig.invalidateCachedToken();
-            //return false;
+            return false;
         }
 
         // Check for updated token header
@@ -191,7 +189,6 @@ public class C2DMessaging {
             throw new IOException("Got empty response from Google datamessaging endpoint.");
         }
 
-        log.info("Google response is: "+ responseLine);
         String[] responseParts = responseLine.split("=", 2);
         if (responseParts.length != 2) {
             log.warning("Invalid message from google: " +

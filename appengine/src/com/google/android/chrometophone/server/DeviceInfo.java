@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.android.chrometophone.server;
+package com.google.android.chrometophone.server; 
 
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;

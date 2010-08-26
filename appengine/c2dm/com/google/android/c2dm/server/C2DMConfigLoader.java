@@ -101,7 +101,9 @@ class C2DMConfigLoader {
             // Create a new JDO object
             dmConfig = new C2DMConfig();
             dmConfig.setKey(key);
-            // Must be in classpath, before sending. Do not checkin !
+            // dataMessagingToken.txt must be in classpath, before sending. Do not checkin !
+            // Extract the auth token to put in dataMessagingToken.txt by running auth.sh 
+            // in the root folder of the project 
             try {
                 InputStream is = this.getClass().getClassLoader().getResourceAsStream("/dataMessagingToken.txt");
                 if (is != null) {

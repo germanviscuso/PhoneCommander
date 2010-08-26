@@ -80,7 +80,7 @@ public class UnregisterServlet extends HttpServlet {
                 resp.getWriter().println(OK_STATUS);
             } catch (JDOObjectNotFoundException e) {
                 resp.setStatus(400);
-                resp.getWriter().println(ERROR_STATUS + " (User unknown)");
+                resp.getWriter().println(ERROR_STATUS + " (User unknown)"); 
                 log.warning("User unknown");
             } catch (Exception e) {
                 resp.setStatus(500);

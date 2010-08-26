@@ -79,9 +79,10 @@ public class SendServlet extends HttpServlet {
             resp.getWriter().println(ERROR_STATUS + " (Must specify url and title parameters)");
             return;
         }
-
+        log.info("Got link for sending: " + url);
         User user = RegisterServlet.checkUser(req, resp, false);
         if (user != null) {
+        	log.info("Sending link to " + user.getEmail());
             doSendToPhone(url, title, sel, user.getEmail(), resp);
         } else {
             resp.getWriter().println(LOGIN_REQUIRED_STATUS);
@@ -98,6 +99,7 @@ public class SendServlet extends HttpServlet {
         try {
             Key key = KeyFactory.createKey(DeviceInfo.class.getSimpleName(), userAccount);
             try {
+            	log.info("Fetching device info for " + userAccount);
                 deviceInfo = pm.getObjectById(DeviceInfo.class, key);
             } catch (JDOObjectNotFoundException e) {
                 log.warning("Device not registered");
@@ -109,7 +111,8 @@ public class SendServlet extends HttpServlet {
         }
 
         // Send push message to phone
-        C2DMessaging push = C2DMessaging.get(getServletContext());
+        log.info("Sending push message to phone");
+        C2DMessaging push = C2DMessaging.get(getServletContext()); 
         boolean res = false;
         String collapseKey = "" + url.hashCode();
         if (deviceInfo.getDebug()) {
@@ -132,7 +135,7 @@ public class SendServlet extends HttpServlet {
             resp.getWriter().println(OK_STATUS);
             return true;
         } else {
-            log.warning("Error: Unable to send link to the phone.");
+            log.warning("Error: Unable to send link to phone.");
             resp.setStatus(500);
             resp.getWriter().println(ERROR_STATUS + " (Unable to send link)");
             return false;

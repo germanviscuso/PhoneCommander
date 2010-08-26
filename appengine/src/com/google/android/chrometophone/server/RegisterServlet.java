@@ -68,9 +68,11 @@ public class RegisterServlet extends HttpServlet {
         if (user == null && errorIfNotLoggedIn) {
             // TODO: redirect to OAuth/user service login, or send the URL
             // TODO: 401 instead of 400
+        	log.info("User is null");
             resp.setStatus(400);
             resp.getWriter().println(ERROR_STATUS + " (Not authorized)");
         }
+        log.info("User identified successfully");
         return user;
     }
 
@@ -101,9 +103,10 @@ public class RegisterServlet extends HttpServlet {
             resp.getWriter().println(ERROR_STATUS + "(Must specify devregid)");
             return;
         }
-
+        log.info("Device ID is " + deviceRegistrationID); 
         User user = checkUser(req, resp, true);
         if (user != null) {
+        	log.info("Storing device " + deviceRegistrationID);
             Key key = KeyFactory.createKey(DeviceInfo.class.getSimpleName(), user.getEmail());
             DeviceInfo device = new DeviceInfo(key, deviceRegistrationID);
             // Context-shared PMF.
@@ -112,6 +115,7 @@ public class RegisterServlet extends HttpServlet {
             try {
                 pm.makePersistent(device);
                 resp.getWriter().println(OK_STATUS);
+                log.info("Device " + deviceRegistrationID + " stored successfully");
             } catch (Exception e) {
                 resp.setStatus(500);
                 resp.getWriter().println(ERROR_STATUS + " (Error registering device)");

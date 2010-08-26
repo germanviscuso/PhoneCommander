@@ -58,9 +58,8 @@ public class DeviceRegistrar {
     private static final String TAG = "DeviceRegistrar";
     //static final String SENDER_ID = "stp.chrome@gmail.com";
     //static final String BASE_URL = "https://chrometophone.appspot.com";
-    static final String SENDER_ID = "germanviscuso@gmail.com";
+    static final String SENDER_ID = "germanviscuso@gmail.com"; 
     static final String BASE_URL = "https://androidstartup1.appspot.com";
-
 
     // Appengine authentication
     private static final String AUTH_URL = BASE_URL + "/_ah/login";
