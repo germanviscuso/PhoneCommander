@@ -41,7 +41,7 @@ import com.google.appengine.api.labs.taskqueue.TaskOptions;
 
 /**
  */
-@SuppressWarnings("serial")
+//@SuppressWarnings("serial")
 public class C2DMessaging {
     private static final String UPDATE_CLIENT_AUTH = "Update-Client-Auth";
 
