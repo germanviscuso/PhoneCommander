@@ -1,0 +1,13 @@
+PhoneCommander allows you to send commands to your Android (2.2+) phone using C2DM.
+It's a spin-off of project "Chrome to Phone" (http://code.google.com/p/chrometophone).
+It consists of 3 modules:
+1) An Android application (phonecommander-android)
+2) A Google App Engine (GAE) for Java project (phonecommander-appengine)
+3) A Chrome Extension (extension)
+
+The Chrome extension allows you to sign-in with your Google account against the GAE server.
+The Android client allows you to register your device with the GAE server using the same Google account on the phone.
+Every time you send a command to the GAE server it gets redirected to the C2DM servers on Google which eventually dispatch a push message to your Android device.
+
+For testing purposes the latest version of the GAE server is live here:
+http://androidstartup1.appspot.com
